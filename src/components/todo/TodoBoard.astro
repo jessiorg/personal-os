@@ -1,0 +1,15 @@
+---
+import TodoBucket from './TodoBucket.astro';
+
+const { buckets } = Astro.props;
+---
+<div class="todo-board">
+  {buckets.map((bucket) => <TodoBucket bucket={bucket} />)}
+</div>
+
+<style>
+  .todo-board {
+    display: grid;
+    gap: 1rem;
+  }
+</style>
