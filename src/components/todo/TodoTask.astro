@@ -1,0 +1,51 @@
+---
+const { task } = Astro.props;
+---
+<li class="task">
+  <label>
+    <input type="checkbox" disabled={task.status === 'done'} />
+    <span class="title">{task.title}</span>
+  </label>
+  <div class="meta">
+    {task.dueDate ? <span>{task.dueDate}</span> : null}
+    <span>{task.priority}</span>
+    {task.note ? <span>{task.note}</span> : null}
+  </div>
+</li>
+
+<style>
+  .task {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    padding: 0.8rem 0.9rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  input {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    accent-color: var(--accent);
+  }
+
+  .title {
+    font-size: 0.97rem;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    padding-left: 1.65rem;
+  }
+</style>
