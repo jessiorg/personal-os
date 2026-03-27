@@ -1,0 +1,99 @@
+---
+import TodoTask from './TodoTask.astro';
+
+const { bucket } = Astro.props;
+---
+<section class="bucket">
+  <header class="bucket-head">
+    <div>
+      <p class="eyebrow">{bucket.label}</p>
+      <h2>{bucket.label}</h2>
+    </div>
+    {bucket.note ? <p class="bucket-note">{bucket.note}</p> : null}
+  </header>
+
+  <div class="bucket-body">
+    {bucket.areas.map((area) => (
+      <section class="area-block">
+        <h3>{area.name}</h3>
+        {area.projects.map((project) => (
+          <section class="project-block">
+            <h4>{project.name}</h4>
+            <ul>
+              {project.tasks.map((task) => <TodoTask task={task} />)}
+            </ul>
+          </section>
+        ))}
+      </section>
+    ))}
+  </div>
+</section>
+
+<style>
+  .bucket {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem;
+  }
+
+  .bucket-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-size: 0.7rem;
+  }
+
+  h2, h3, h4, p {
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+  }
+
+  .bucket-note {
+    color: var(--muted);
+    font-size: 0.9rem;
+    max-width: 28rem;
+    text-align: right;
+  }
+
+  .bucket-body {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .area-block,
+  .project-block {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .area-block > h3,
+  .project-block > h4 {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+</style>
