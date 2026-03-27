@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import TodoLayout from '../../layouts/TodoLayout.astro';
+import TodoBoard from '../../components/todo/TodoBoard.astro';
+import SupabaseSession from '../../components/auth/SupabaseSession.astro';
+
+const bucketOrder = ['today', 'upcoming', 'anytime', 'someday'] as const;
+const bucketLabel: Record<(typeof bucketOrder)[number], string> = {
+  today: 'Today',
+  upcoming: 'Upcoming',
+  anytime: 'Anytime',
+  someday: 'Someday',
+};
+
+const bucketNote: Record<(typeof bucketOrder)[number], string> = {
+  today: 'Current work set.',
+  upcoming: 'Sequenced work with a date attached.',
+  anytime: 'Ready when capacity opens.',
+  someday: 'Deferred material and future ideas.',
+};
+
+const tasks = (await getCollection('tasks'))
+  .map((entry) => ({ id: entry.id, ...entry.data }))
+  .filter((task) => task.status !== 'done')
+  .sort((left, right) => {
+    const bucketDelta = bucketOrder.indexOf(left.bucket) - bucketOrder.indexOf(right.bucket);
+    if (bucketDelta !== 0) return bucketDelta;
+    return (left.sortOrder ?? 999) - (right.sortOrder ?? 999);
+  });
+
+const buckets = bucketOrder.map((bucket) => {
+  const items = tasks.filter((task) => task.bucket === bucket);
+  const areas = Array.from(new Set(items.map((task) => task.area))).map((area) => ({
+    name: area,
+    projects: Array.from(new Set(items.filter((task) => task.area === area).map((task) => task.project ?? 'General'))).map((project) => ({
+      name: project,
+      tasks: items.filter((task) => task.area === area && (task.project ?? 'General') === project),
+    })),
+  }));
+
+  return {
+    key: bucket,
+    label: bucketLabel[bucket],
+    note: bucketNote[bucket],
+    areas,
+  };
+});
+---
+<TodoLayout title="Todo">
+  <section class="page-shell">
+    <header class="page-head">
+      <div>
+        <p class="eyebrow">Todo</p>
+        <h1>Tasks</h1>
+      </div>
+      <SupabaseSession session={Astro.locals.supabase} />
+    </header>
+
+    <TodoBoard buckets={buckets} />
+  </section>
+</TodoLayout>
+
+<style>
+  .page-shell {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .page-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: -0.04em;
+  }
+</style>
