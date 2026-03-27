@@ -1,0 +1,21 @@
+---
+const { session } = Astro.props;
+---
+<div class="session-shell">
+  {session ? (
+    <p>Signed in as {session.email ?? 'user'}</p>
+  ) : (
+    <p>Authentication required.</p>
+  )}
+</div>
+
+<style>
+  .session-shell {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 0.85rem 1rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>
