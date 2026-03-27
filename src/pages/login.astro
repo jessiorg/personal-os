@@ -1,0 +1,86 @@
+---
+import TodoLayout from '../layouts/TodoLayout.astro';
+---
+<TodoLayout title="Login">
+  <section class="login-shell">
+    <div>
+      <p class="eyebrow">Supabase auth</p>
+      <h1>Sign in</h1>
+      <p class="copy">This page is a structural placeholder for a Supabase-backed session flow.</p>
+    </div>
+
+    <form class="card">
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" placeholder="name@example.com" />
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" name="password" placeholder="••••••••" />
+      </label>
+      <button type="button">Continue</button>
+    </form>
+  </section>
+</TodoLayout>
+
+<style>
+  .login-shell {
+    display: grid;
+    gap: 1rem;
+    max-width: 32rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: -0.04em;
+  }
+
+  .copy {
+    color: var(--muted);
+    margin: 0.5rem 0 0;
+  }
+
+  .card {
+    display: grid;
+    gap: 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem;
+  }
+
+  label {
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.92rem;
+  }
+
+  span {
+    color: var(--muted);
+  }
+
+  input {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.85rem;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  button {
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    background: var(--accent);
+    color: white;
+    padding: 0.8rem 1rem;
+  }
+</style>
