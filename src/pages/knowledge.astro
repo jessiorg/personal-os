@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Knowledge Base - Kanay Company OS">
+  <main>
+    <div class="page-header">
+      <h1>Knowledge Base</h1>
+      <p>Search and explore the company knowledge repository</p>
+    </div>
+
+    <div class="search-section">
+      <input 
+        type="search" 
+        placeholder="Search knowledge base..."
+        class="search-input"
+      />
+    </div>
+
+    <div class="content">
+      <div class="sidebar">
+        <h3>Categories</h3>
+        <ul>
+          <li><a href="#">Engineering</a></li>
+          <li><a href="#">Product</a></li>
+          <li><a href="#">Design</a></li>
+          <li><a href="#">Business</a></li>
+          <li><a href="#">Operations</a></li>
+        </ul>
+      </div>
+
+      <div class="main-content">
+        <h2>Getting Started</h2>
+        <p>The knowledge base integration will be configured here. This will provide:</p>
+        <ul>
+          <li>Full-text search across all documents</li>
+          <li>AI-powered recommendations</li>
+          <li>Version history and tracking</li>
+          <li>Collaborative editing</li>
+          <li>Automatic categorization</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .search-section {
+    margin-bottom: 2rem;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    transition: border-color 0.3s;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+  }
+
+  .sidebar {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .sidebar h3 {
+    margin-bottom: 1rem;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar li {
+    margin: 0.5rem 0;
+  }
+
+  .sidebar a {
+    color: #666;
+    text-decoration: none;
+  }
+
+  .sidebar a:hover {
+    color: var(--color-primary);
+  }
+
+  .main-content {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .main-content h2 {
+    margin-bottom: 1rem;
+  }
+
+  .main-content ul {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .main-content li {
+    margin: 0.5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: static;
+    }
+  }
+</style>
