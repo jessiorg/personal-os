@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Widget from '../components/Widget.astro';
+---
+
+<Layout title="Kanay Company OS - Home">
+  <main>
+    <section class="hero">
+      <h1>Welcome to <span class="gradient-text">Company OS</span></h1>
+      <p class="subtitle">Your central hub for knowledge, collaboration, and productivity</p>
+    </section>
+    
+    <section class="dashboard">
+      <h2>Dashboard</h2>
+      <div class="widgets">
+        <Widget
+          title="Knowledge Base"
+          description="Access and search the company knowledge repository"
+          icon="📚"
+          href="/knowledge"
+        />
+        <Widget
+          title="Projects"
+          description="View and manage active projects and tasks"
+          icon="📋"
+          href="/projects"
+        />
+        <Widget
+          title="Team Directory"
+          description="Find team members and organizational structure"
+          icon="👥"
+          href="/team"
+        />
+        <Widget
+          title="Analytics"
+          description="Company metrics, KPIs, and performance insights"
+          icon="📊"
+          href="/analytics"
+        />
+        <Widget
+          title="Documents"
+          description="Shared documents and file management"
+          icon="📄"
+          href="/documents"
+        />
+        <Widget
+          title="Calendar"
+          description="Schedule, meetings, and important dates"
+          icon="📅"
+          href="/calendar"
+        />
+      </div>
+    </section>
+
+    <section class="recent-activity">
+      <h2>Recent Activity</h2>
+      <div class="activity-list">
+        <div class="activity-item">
+          <span class="activity-time">Just now</span>
+          <p>Welcome to Kanay Company OS! Set up your workspace to get started.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 3rem 0 2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    color: #666;
+    margin-top: 0.5rem;
+  }
+
+  section {
+    margin-top: 3rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .recent-activity {
+    max-width: 800px;
+  }
+
+  .activity-list {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .activity-item {
+    padding: 1rem 0;
+  }
+
+  .activity-time {
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 500;
+  }
+
+  .activity-item p {
+    margin-top: 0.25rem;
+    color: #666;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .widgets {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
